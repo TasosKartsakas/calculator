@@ -31,13 +31,12 @@ function operate(operator,a,b) {
     }
     else if (operator === '/') {
         return a / b;
-    }
+    }   
 }
 
  //Generic event listeners.
 
 buttons.addEventListener('click', (e) => {
-    
     if (e.target === display) {
         display.textContent;
     }
@@ -95,28 +94,25 @@ floatsBtn.addEventListener('click', (e) =>{
 
 operators.forEach((item) => item.addEventListener('click', (e) => {
     e.stopPropagation();
+    // if (calculator.operator === '') {
+    //     calculator.operator = item.textContent
+    // }
     if (calculator.operator) {
         calculator.totalNum = operate(calculator.operator,calculator.totalNum,calculator.currentNum);
     }
     else {
-        calculator.operator = item.textContent;
+        // calculator.operator = item.textContent;
         calculator.totalNum = calculator.currentNum;
     }
     display.textContent = '';
     smallDis.textContent = calculator.totalNum;
     calculator.operator = item.textContent;
-    
+    if (calculator.operator === '=') {
+        return calculator.operator = ''
+    }
 }))
 
 
+buttons.addEventListener('keydown',(e) => {
 
-
-
-
-
-
-
-
-
-
-
+})

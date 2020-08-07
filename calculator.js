@@ -4,6 +4,7 @@ let calculator = {
     totalNum: 0 
 }
 
+const negative = document.querySelector('.negative')
 const equal = document.querySelector('.equal')
 const operators = document.querySelectorAll('.operators')
 const buttons = document.querySelector(".calculator");
@@ -34,6 +35,17 @@ function operate(operator,a,b) {
     }   
 }
 
+// Negative Numbers
+
+negative.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (display.textContent.includes('-')){
+        display.textContent = display.textContent.replace('-','')
+    }
+    else 
+    display.textContent = '-' + display.textContent
+    calculator.currentNum = parseFloat(display.textContent, '10')
+})
  //Generic event listeners.
 
 buttons.addEventListener('click', (e) => {
@@ -90,18 +102,15 @@ floatsBtn.addEventListener('click', (e) =>{
     
 });
 
+
 // Operators
 
 operators.forEach((item) => item.addEventListener('click', (e) => {
     e.stopPropagation();
-    // if (calculator.operator === '') {
-    //     calculator.operator = item.textContent
-    // }
     if (calculator.operator) {
         calculator.totalNum = operate(calculator.operator,calculator.totalNum,calculator.currentNum);
     }
     else {
-        // calculator.operator = item.textContent;
         calculator.totalNum = calculator.currentNum;
     }
     display.textContent = '';
@@ -114,5 +123,5 @@ operators.forEach((item) => item.addEventListener('click', (e) => {
 
 
 buttons.addEventListener('keydown',(e) => {
-
+    display.textContent += ` ${e.keyCode} `
 })

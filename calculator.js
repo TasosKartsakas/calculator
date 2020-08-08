@@ -18,6 +18,7 @@ const floatsBtn = document.querySelector(".floats");
 const display = document.getElementById('display');
 const smallDis = document.getElementById('small')
 
+// buttons.focus();
 // Operator Function
 
 function operate(operator,a,b) {
@@ -68,6 +69,7 @@ deleteBtn.addEventListener('click', (e) => {
     }
     if (display.textContent.length === 0) {
         display.textContent = '';
+        calculator.currentNum = 0;
     }
     e.stopPropagation();
 })
@@ -103,7 +105,7 @@ floatsBtn.addEventListener('click', (e) =>{
 });
 
 
-// Operators
+// Operators.
 
 operators.forEach((item) => item.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -121,7 +123,58 @@ operators.forEach((item) => item.addEventListener('click', (e) => {
     }
 }))
 
+//Keyboard Support.
 
-buttons.addEventListener('keydown',(e) => {
-    display.textContent += ` ${e.keyCode} `
+document.addEventListener('keydown',(e) => {
+    console.log(e)
+    const nums = document.querySelector(`button[data-key='${e.keyCode}']`);
+    if(!nums || e.shiftKey == true) return
+    else
+    display.textContent += nums.textContent
+    calculator.currentNum = parseFloat(display.textContent,'10');
 })
+
+document.addEventListener('keydown', (e) => {
+    if (e.key == 'Backspace'){
+       deleteBtn.click();
+    }
+    if (e.key == '.' ) {
+        floatsBtn.click();
+    }
+    if (e.key == 'Escape' || e.key == 'Delete') {
+        clearBtn.click();
+    }
+    if (e.key == '+'){
+        test('+')
+    }
+    if (e.key == '-'){
+        test('-')
+    }
+    if (e.key == '*'){
+        test('*')
+    }
+    if (e.key == '/'){
+        test('/')
+    }
+    if (e.key == '=') {
+        test('=')
+    }
+    if (e.key == 'Enter'){
+        test('=')
+    }
+})
+
+function test(operator){
+    if (calculator.operator) {
+        calculator.totalNum = operate(calculator.operator,calculator.totalNum,calculator.currentNum);
+    }
+    else {
+        calculator.totalNum = calculator.currentNum;
+    }
+    display.textContent = '';
+    smallDis.textContent = calculator.totalNum;
+    calculator.operator = operator;
+    if (calculator.operator === '=') {
+        return calculator.operator = ''
+    }
+}

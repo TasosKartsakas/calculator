@@ -20,7 +20,7 @@ body {
     width: 40%;
     margin: 0 auto;
     border: 2px solid rgb(28, 29, 27);
-    
+    /* border-radius: 30px; */
 }
 
 
@@ -52,6 +52,8 @@ button {
     background: black;
     color: lawngreen;
     font-size: 1.2rem;
+    /* margin: 0.1em;*/
+    /* border-radius: 30px; */
 }
 
 .digits {

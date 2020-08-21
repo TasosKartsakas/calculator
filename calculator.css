@@ -1,45 +1,63 @@
-*{
+* {
     box-sizing: border-box;
 }
 
 body {
     margin:0;
+    background: #faf8ff;
+    font-family: 'Rock Salt', cursive;
+    font-size: .9rem;
+}
+
+h2 {
+    text-align: center;
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 100px;
+    display: flex;
+    max-width: 100%;
+    /* margin: 0 auto; */
+    padding: 40px 0px ;
+    justify-content: center;
 }
 
 
 .calculator {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(7, minmax(0, 1fr));
-    width: 40%;
-    margin: 0 auto;
-    border: 2px solid rgb(28, 29, 27);
-    /* border-radius: 30px; */
+    grid-template-columns: repeat(4, minmax(20px, 1fr));
+    grid-template-rows: repeat(7, minmax(20px, 1fr));
+    width: 15%;
+    min-width: 380px;
+    border: 1px solid #faf8ff;
+    border-radius: 30px;
+    background-color: #e3e0f3;
+    border: 1px #aca9bb solid;
+    /* padding: 5px; */
 }
 
 
+
 .num-secondary {
-    background: rgb(44, 42, 42);
+    background: #e3e0f3;
     grid-column: 1/ span 4;
-    border: 1px rgb(32, 33, 34) solid;
-    color: lawngreen;
+    border-bottom: 1px #aca9bb solid;
+    color: black;
+    font-weight: 900;
     padding: .6rem;
-     
+    border-radius: 28px 28px 0px 0px;
     
 }
 
 .num-main {
-    background: rgb(44, 42, 42);
+    background: #e3e0f3;
     grid-column: 1 /span 4;
+    border-bottom: 1px #aca9bb solid;
     grid-row: 2;
-    color: lawngreen;
+    font-weight: 900;
+    color: black;
     padding: .6rem;
+    margin-bottom: 0.3rem;
+    /* border-radius: 30px; */
 }
 
 
@@ -49,30 +67,48 @@ body {
 }
 
 button {
-    background: black;
-    color: lawngreen;
-    font-size: 1.2rem;
-    /* margin: 0.1em;*/
-    /* border-radius: 30px; */
+    background: white;
+    color: black;
+    font-size: 1rem;
+    font-weight: 900;
+    margin: .2em;
+    border-radius: 1em; 
+    /* padding: 1em; */
+    border: hidden;
+    font-family: 'Rock Salt', cursive;
 }
 
-.digits {
+/* .digits {
     border: 1px solid lawngreen;
-}
+} */
 
 button:hover {
-    opacity: 0.6;
+    opacity: 0.85;
+}
+
+button:active {
+    scale: 0.96;
 }
 
 .different {
-    background: rgb(87, 26, 26);
+    background: #8685ef;
 }
 
 #display {
     white-space: nowrap;
     overflow: hidden;
+    text-align: right;
+    padding-right: 1em;
+
+}
+
+#small {
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: right;
+    padding-right: 1em;
 }
 
 p {
-    height: 1rem;
+    height: 1.75rem;
 }

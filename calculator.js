@@ -4,21 +4,17 @@ let calculator = {
     totalNum: 0 
 }
 
+const calc = document.querySelector('.calculator')
 const negative = document.querySelector('.negative')
 const equal = document.querySelector('.equal')
 const operators = document.querySelectorAll('.operators')
 const buttons = document.querySelector(".calculator");
 const deleteBtn = document.querySelector(".delete");
 const clearBtn = document.querySelector(".clear");
-// const addBtn = document.querySelector(".addition");
-// const multiplyBtn = document.querySelector(".multiply");
-// const divideBtn = document.querySelector(".divide");
-// const subtractBtn = document.querySelector(".subtract");
 const floatsBtn = document.querySelector(".floats");
 const display = document.getElementById('display');
 const smallDis = document.getElementById('small')
 
-// buttons.focus();
 // Operator Function
 
 function operate(operator,a,b) {
@@ -50,6 +46,9 @@ negative.addEventListener('click', (e) => {
  //Generic event listeners.
 
 buttons.addEventListener('click', (e) => {
+    if (e.target === calc) {
+        return display.textContent;
+    }
     if (e.target === display) {
         display.textContent;
     }
@@ -109,24 +108,12 @@ floatsBtn.addEventListener('click', (e) =>{
 
 operators.forEach((item) => item.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (calculator.operator) {
-        calculator.totalNum = operate(calculator.operator,calculator.totalNum,calculator.currentNum);
-    }
-    else {
-        calculator.totalNum = calculator.currentNum;
-    }
-    display.textContent = '';
-    smallDis.textContent = calculator.totalNum;
-    calculator.operator = item.textContent;
-    if (calculator.operator === '=') {
-        return calculator.operator = ''
-    }
+    operation(item.textContent)
 }))
 
 //Keyboard Support.
 
 document.addEventListener('keydown',(e) => {
-    console.log(e)
     const nums = document.querySelector(`button[data-key='${e.keyCode}']`);
     if(!nums || e.shiftKey == true) return
     else
@@ -145,26 +132,28 @@ document.addEventListener('keydown', (e) => {
         clearBtn.click();
     }
     if (e.key == '+'){
-        test('+')
+        operation('+')
     }
     if (e.key == '-'){
-        test('-')
+        operation('-')
     }
     if (e.key == '*'){
-        test('*')
+        operation('*')
     }
     if (e.key == '/'){
-        test('/')
+        e.preventDefault();
+        operation('/')
     }
     if (e.key == '=') {
-        test('=')
+        operation('=')
     }
     if (e.key == 'Enter'){
-        test('=')
+        e.preventDefault();
+        operation('=')
     }
 })
 
-function test(operator){
+function operation(operator){
     if (calculator.operator) {
         calculator.totalNum = operate(calculator.operator,calculator.totalNum,calculator.currentNum);
     }
@@ -175,6 +164,11 @@ function test(operator){
     smallDis.textContent = calculator.totalNum;
     calculator.operator = operator;
     if (calculator.operator === '=') {
-        return calculator.operator = ''
+        calculator.currentNum = 0;
+        return calculator.operator = '';
+    }
+    if (isNaN(calculator.totalNum)) {
+        calculator.totalNum = 0;
+        smallDis.textContent = 'Error';
     }
 }
